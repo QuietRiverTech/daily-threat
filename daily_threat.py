@@ -157,8 +157,8 @@ IMPORTANT — For each CVE, provide CONTEXT that a security professional would a
 - Who should be worried (what industries, what stack)
 - Brief mention of mitigation if notable (patch available, workaround, etc.)
 
-- Target length: 3 minutes when read aloud (~450-500 words)
-- Cover 3-4 CVEs in depth rather than 5+ superficially
+- Target length: 2.5 minutes when read aloud (~350 words)
+- Cover 3 CVEs with solid context, not 5+ superficially
 - Make it entertaining AND genuinely educational — listeners should walk away understanding the threats
 - Mention real CVE IDs, products, CVSS scores, and EPSS probabilities"""
 
@@ -255,12 +255,12 @@ def generate_audio(script_text, output_path):
             },
             json={
                 "text": script_text,
-                "model_id": "eleven_turbo_v2_5",
+                "model_id": "eleven_multilingual_v2",
                 "voice_settings": {
-                    "stability": 0.7,
+                    "stability": 0.85,
                     "similarity_boost": 0.80,
-                    "style": 0.35,
-                    "speed": 0.85,
+                    "style": 0.15,
+                    "speed": 0.90,
                 },
             },
             timeout=120,
