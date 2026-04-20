@@ -193,11 +193,19 @@ def generate_metadata(date_str, cves, script_text):
         dict with keys: 'title', 'description', 'tags'
     """
     # Parse date
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
+    # Accept multiple date formats
+    for fmt in ("%B %d, %Y", "%Y-%m-%d", "%m/%d/%Y"):
+        try:
+            dt = datetime.strptime(date_str, fmt)
+            break
+        except ValueError:
+            continue
+    else:
+        dt = datetime.now()
     formatted_date = dt.strftime("%B %d, %Y").replace(" 0", " ")
 
     # --- Title ---
-    top_cve_ids = [c["id"] for c in cves[:3]]
+    top_cve_ids = [c.get("cve_id", c.get("id", "CVE-?")) for c in cves[:3]]
     cve_str = " | ".join(top_cve_ids) if top_cve_ids else "New Vulnerabilities"
     title = f"The Daily Threat | {formatted_date} | {cve_str}"
     # YouTube title max 100 chars
@@ -224,7 +232,7 @@ def generate_metadata(date_str, cves, script_text):
     desc_parts.append("")
     desc_parts.append("🔗 CVE References:")
     for cve in cves:
-        cve_id = cve["id"]
+        cve_id = cve.get("cve_id", cve.get("id", "CVE-?"))
         summary = cve.get("summary", "")
         link = f"https://nvd.nist.gov/vuln/detail/{cve_id}"
         line = f"• {cve_id}: {link}"
