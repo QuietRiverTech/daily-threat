@@ -4,6 +4,8 @@
 
 Every day, Jack Cipher hits the streets to investigate the latest CVEs, KEV additions, and EPSS scores. Written by AI, narrated by Jelf (ElevenLabs), delivered to your Telegram.
 
+![Screenshot](screenshot.png)
+
 ---
 
 ## How It Works
