@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+episodes/
+.venv/
+venv/
+*.mp3
+*.log
